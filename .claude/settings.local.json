@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "Read(c:\\Users\\Edward\\OneDrive\\Pictures\\Screenshots/**)",
+      "Read(c:\\Users\\Edward\\OneDrive\\Pictures\\Screenshots/**)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(render --version)",
+      "Bash(railway --version)",
+      "Bash(railway login:*)",
+      "Bash(railway whoami:*)",
+      "Bash(env)",
+      "Bash(render services list)",
+      "Bash(render whoami)",
+      "Bash(where render)",
+      "Bash(npm uninstall:*)",
+      "WebSearch",
+      "WebFetch(domain:render.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(curl:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
