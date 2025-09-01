@@ -238,5 +238,5 @@ class ChineseLearningAPI {
 // Export singleton instance
 export const api = new ChineseLearningAPI();
 
-// Auto-preload common data
-api.preloadCommonData();
+// Auto-preload common data (disabled until API server is deployed)
+// api.preloadCommonData();
