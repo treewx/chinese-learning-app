@@ -1,6 +1,12 @@
 // High-performance API client with caching and optimization
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
+// Check if we're in production and API URL is not set
+const isProduction = window.location.hostname !== 'localhost';
+const actualApiUrl = isProduction && !import.meta.env.VITE_API_URL 
+  ? `${window.location.protocol}//${window.location.hostname}:3001`
+  : API_BASE_URL;
+
 class ChineseLearningAPI {
   constructor() {
     this.cache = new Map();
@@ -9,7 +15,7 @@ class ChineseLearningAPI {
 
   // Generic fetch with caching and error handling
   async fetch(endpoint, options = {}) {
-    const url = `${API_BASE_URL}${endpoint}`;
+    const url = `${actualApiUrl}${endpoint}`;
     const cacheKey = `${url}_${JSON.stringify(options)}`;
     
     // Return cached result if available
@@ -186,16 +192,19 @@ class ChineseLearningAPI {
   }
 
   getFallbackImageUrl(char, englishMeaning) {
-    // Generate SVG fallback image
-    return `data:image/svg+xml;base64,${btoa(`
+    // Generate SVG fallback image - use encodeURIComponent to handle Chinese characters
+    const svgContent = `
       <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
         <rect width="400" height="400" fill="#4F46E5"/>
         <text x="200" y="200" font-family="Arial, sans-serif" font-size="120" fill="white" 
               text-anchor="middle" dominant-baseline="middle">${char}</text>
         <text x="200" y="320" font-family="Arial, sans-serif" font-size="20" fill="white" 
-              text-anchor="middle" dominant-baseline="middle">${englishMeaning}</text>
+              text-anchor="middle" dominant-baseline="middle">${englishMeaning || char}</text>
       </svg>
-    `)}`;
+    `;
+    
+    // Use encodeURIComponent instead of btoa for Unicode safety
+    return `data:image/svg+xml,${encodeURIComponent(svgContent)}`;
   }
 
   // Clear client cache

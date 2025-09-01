@@ -161,6 +161,8 @@ const ChineseLearningApp = () => {
       
     } catch (error) {
       console.error('Error preparing image:', error);
+      const charData = characters[charIndex];
+      const englishMeaning = charData?.translation || char;
       const fallbackUrl = api.getFallbackImageUrl(char, englishMeaning);
       setCurrentImageUrl(fallbackUrl);
       setCurrentImage(`Character: ${char} (${englishMeaning || 'unknown'})`);
