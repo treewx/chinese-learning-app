@@ -30,7 +30,10 @@
       "Bash(git push:*)",
       "Bash(railway status:*)",
       "Bash(railway create:*)",
-      "Bash(railway:*)"
+      "Bash(railway:*)",
+      "Bash(move srcApp.tsx srcApp-old.tsx)",
+      "Bash(move srcApp-optimized.tsx srcApp.tsx)",
+      "Bash(ren:*)"
     ],
     "deny": [],
     "ask": []
